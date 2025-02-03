@@ -39,11 +39,13 @@ export const FormUpdateAction = ({
 
     // Use startTransition to ensure async execution inside action context
     startTransition(() => {
-      formAction(formData);
+      formAction(formData).then(() => {
+        router.push("/home"); // ✅ Redirect only after form submission
+      });
     });
 
     // Redirect to /home after successful update
-    router.push("/home");
+    // router.push("/home");
   };
 
   return (
