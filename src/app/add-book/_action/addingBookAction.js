@@ -1,5 +1,5 @@
 "use server";
-
+import { redirect } from "next/navigation";
 import { API_URL } from "@/constant/api-url";
 import { revalidatePath } from "next/cache";
 
@@ -19,4 +19,5 @@ export async function addNewQuoteBook(_, formData) {
   });
 
   revalidatePath("/home");
+  redirect("/home");
 }

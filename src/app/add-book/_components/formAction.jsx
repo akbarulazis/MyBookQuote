@@ -1,12 +1,11 @@
 "use client";
-import { useRouter } from "next/navigation"; // For Redirect After Submission not using LINK because ActionState
+
 import { addNewQuoteBook } from "../_action/addingBookAction";
 import { Card, CardBody, Button, Input, Form } from "@heroui/react";
 import { useActionState } from "react";
 import { useState, startTransition } from "react"; // UseState : Manage Error Submission, Transition : UI not error while managing submission
 
 export const FormAddAction = () => {
-  const router = useRouter(); // declare variabel for routing
   const [state, formAction, pending] = useActionState(addNewQuoteBook, null);
   const [error, setError] = useState(""); // declare error submissiion
   const randomNumber = Math.floor(Math.random() * 699); //random state to give attachment pic
@@ -32,9 +31,6 @@ export const FormAddAction = () => {
     startTransition(() => {
       formAction(formData);
     });
-
-    // Redirect to /home after successful submission
-    router.push("/home");
   };
 
   return (

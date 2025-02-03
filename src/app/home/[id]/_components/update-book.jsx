@@ -1,5 +1,5 @@
 "use client";
-import { useRouter } from "next/navigation"; // For Redirect After Submission not using LINK because ActionState
+
 import { UpdateQuoteBook } from "../_action/updateBook";
 import { Card, CardBody, Button, Input, Form } from "@heroui/react";
 import { useActionState } from "react";
@@ -13,7 +13,6 @@ export const FormUpdateAction = ({
   quote,
   oldAttachment,
 }) => {
-  const router = useRouter(); // declare variabel for routing
   const [state, formAction, pending] = useActionState(UpdateQuoteBook, null);
   const [error, setError] = useState(""); // declare error submissiion
   const randomNumber = Math.floor(Math.random() * 699); //random state to give attachment pic
@@ -39,13 +38,8 @@ export const FormUpdateAction = ({
 
     // Use startTransition to ensure async execution inside action context
     startTransition(() => {
-      formAction(formData).then(() => {
-        router.push("/home"); // ✅ Redirect only after form submission
-      });
+      formAction(formData);
     });
-
-    // Redirect to /home after successful update
-    // router.push("/home");
   };
 
   return (
